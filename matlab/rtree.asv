@@ -36,11 +36,36 @@ function tree = rtree(X, y, depth, max_depth, min_samples_leaf)
             w_right = numel(y(right_idx))/numel(y);
             mse_reduction = mse_prev - (w_left*mse_left) - (w_right-mse_right);
     
+    
             % update the best feature if this one is better
             if mse_reduction > best_mse_reduction
                 best_mse_reduction = mse_reduction;
                 best_feature = i;
                 split = values(j);
+            end
+            end
+        else
+            mse_prev = mse(mean(y),y);
+            for j = 1:numel(values)
+                right_idx = X(:, i) >= values(j);
+                left_idx = ~right_idx;
+                if sum(left_idx) == 0 || sum(right_idx) == 0
+                    continue
+                end
+                % Calculate mse reduction
+                mse_left = mse(mean(y(left_idx)),y);
+                mse_right = mse(mean(y(right_idx)),y);
+                w_left = numel(y(left_idx))/numel(y);
+                w_right = numel(y(right_idx))/numel(y);
+                mse_reduction = mse_prev - (w_left*mse_left) - (w_right-mse_right);
+    
+    
+                % update the best feature if this one is better
+                if mse_reduction > best_mse_reduction
+                    best_mse_reduction = mse_reduction;
+                    best_feature = i;
+                    split = values(j);
+                end
             end
         end
     end
