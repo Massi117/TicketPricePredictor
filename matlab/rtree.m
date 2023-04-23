@@ -19,13 +19,19 @@ function tree = rtree(X, y, depth, max_depth, min_samples_leaf)
     
     % find the best feature to split on using Gini impurity & MSE
     best_mse_reduction = -Inf;
+    classes = varfun(@class,X,'OutputFormat','cell');
     for i = 1:d
         % calculate the mse reduction of splitting on feature i
-        values = unique(X(:, i));
+        values = unique(X.(i));
         mse_prev = mse(mean(y),y);
         for j = 1:numel(values)
-            right_idx = X(:, i) >= values(j);
-            left_idx = ~right_idx;
+            if strcmp(classes{i},'categorical')
+                right_idx = X.(i) == values(j);
+                left_idx = ~right_idx;
+            else
+                right_idx = X.(i) >= values(j);
+                left_idx = ~right_idx;
+            end
             if sum(left_idx) == 0 || sum(right_idx) == 0
                 continue
             end
@@ -52,8 +58,13 @@ function tree = rtree(X, y, depth, max_depth, min_samples_leaf)
     tree.is_leaf = false;
     
     % split the data on the best feature
-    left_idx = X(:, best_feature) < split;
-    right_idx = X(:, best_feature) >= split;
+    if strcmp(classes{best_feature},'categorical')
+        right_idx = X.(best_feature) == split;
+        left_idx = ~right_idx;
+    else
+        right_idx = X.(best_feature) >= split;
+        left_idx = ~right_idx;
+    end
         
     % recursively create a subtree for the split data
     tree.left = rtree(X(left_idx, :), y(left_idx), depth+1, max_depth, min_samples_leaf);

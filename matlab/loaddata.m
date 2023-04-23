@@ -7,7 +7,7 @@ T.Var1 = [];
 
 % Formatting the data
 T.airline = categorical(T.airline);
-T.flight = categorical(T.flight);
+T.flight = [];
 T.source_city = categorical(T.source_city);
 T.departure_time = categorical(T.departure_time);
 T.stops = categorical(T.stops);
@@ -16,7 +16,7 @@ T.destination_city = categorical(T.destination_city);
 T.class = categorical(T.class);
 
 % Separate into the inputs and labels
-y = T.price;
+y = T.price/82.04;
 X = T;
 X.price = [];
 

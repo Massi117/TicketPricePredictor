@@ -10,14 +10,23 @@ function y_pred = tree_predict(tree, X)
 
 m = size(X, 1);
 y_pred = zeros(m, 1);
+classes = varfun(@class,X,'OutputFormat','cell');
 
 for i = 1:m
     node = tree;
     while ~node.is_leaf
-        if X(i, node.col_index) < node.split
-            node = node.left;
+        if strcmp(classes{node.col_index},'categorical')
+            if X.(node.col_index)(i) ~= node.split
+                node = node.left;
+            else
+                node = node.right;
+            end
         else
-            node = node.right;
+            if X.(node.col_index)(i) < node.split
+                node = node.left;
+            else
+                node = node.right;
+            end
         end
     end
     y_pred(i) = node.value;
