@@ -6,7 +6,7 @@ loaddata;
 
 %% Define dimensions
 [m,d] = size(Xtr);
-T = 50;                         % # of trees in random forest
+T = 10;                         % # of trees in random forest
 mtest = size(Xte,1);
 
 % Select a subsample with replacement (boostraping)
@@ -26,7 +26,7 @@ for i = 1:T
     Xi = Xtr(theta(:,i),feat(:,i));
     yi = ytr(theta(:,i));
 
-    DTCell{i} = rtree(Xi, yi, 0, 30, 3);
+    DTCell{i} = rtree(Xi, yi, 0, 10, 10);
     
     % Get predictions
     predictions(:,i) = tree_predict(DTCell{i}, Xte(:,feat(:,i)));
