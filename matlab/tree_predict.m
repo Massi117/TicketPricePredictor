@@ -9,20 +9,21 @@ function y_pred = tree_predict(tree, X)
 %   - y_pred: the predicted class labels (n_test x 1)
 
 m = size(X, 1);
-y_pred = zeros(m, 1);
 classes = varfun(@class,X,'OutputFormat','cell');
+X = table2cell(X);
+y_pred = zeros(m, 1);
 
 for i = 1:m
     node = tree;
     while ~node.is_leaf
         if strcmp(classes{node.col_index},'categorical')
-            if X.(node.col_index)(i) ~= node.split
+            if X{i,node.col_index} ~= node.split
                 node = node.left;
             else
                 node = node.right;
             end
         else
-            if X.(node.col_index)(i) < node.split
+            if X{i,node.col_index} < node.split
                 node = node.left;
             else
                 node = node.right;

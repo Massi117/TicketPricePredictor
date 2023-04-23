@@ -24,8 +24,9 @@ function tree = rtree(X, y, depth, max_depth, min_samples_leaf)
         % calculate the mse reduction of splitting on feature i
         values = unique(X.(i));
         mse_prev = mse(mean(y),y);
+        iscat = strcmp(classes{i},'categorical');
         for j = 1:numel(values)
-            if strcmp(classes{i},'categorical')
+            if iscat
                 right_idx = X.(i) == values(j);
                 left_idx = ~right_idx;
             else
@@ -49,6 +50,13 @@ function tree = rtree(X, y, depth, max_depth, min_samples_leaf)
                 split = values(j);
             end
         end
+    end
+
+    % No better way to split the data
+    if best_mse_reduction == -Inf
+        tree.value = mean(y);
+        tree.is_leaf = true;
+        return
     end
     
     % create a node for the best feature

@@ -5,18 +5,11 @@ close all
 % Load data
 loaddata
 
-% Ben's Data
-%Xtr = readmatrix('Xtrain.csv');
-%ytr = readmatrix('ytrain.csv');
-%Xte = readmatrix('Xtest.csv');
-%yte = readmatrix('ytest.csv');
-
-
 %% Compare with best
-TREE = fitrtree(Xtr,ytr,'MaxNumSplits',30,'MinLeafSize',5);
+TREE = fitrtree(Xtr,ytr,'MaxNumSplits',30,'MinLeafSize',3);
 
 %% Make the tree
-tree = rtree(Xtr, ytr, 0, 30, 5);
+tree = rtree(Xtr, ytr, 0, 30, 3);
 
 %% Make predictions
 y_pred = tree_predict(tree, Xte);
