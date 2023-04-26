@@ -37,7 +37,7 @@ TREE = fitctree(Xtr,ytr);
 tree = ctree(Xtr, ytr, 0, 30);
 
 %% Make predictions
-y_pred = tree_predict(tree, Xte);
+y_pred = predict(tree, Xte);
 yhat = predict(TREE, Xte);
 
 % Compute accuracy

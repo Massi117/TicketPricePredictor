@@ -1,4 +1,4 @@
-function y_pred = tree_predict(tree, X)
+function y_pred = tree_predict(tree, X, classes)
 % Predict the class labels of the test data using the decision tree
 
 % Inputs:
@@ -9,8 +9,6 @@ function y_pred = tree_predict(tree, X)
 %   - y_pred: the predicted class labels (n_test x 1)
 
 m = size(X, 1);
-classes = varfun(@class,X,'OutputFormat','cell');
-X = table2cell(X);
 y_pred = zeros(m, 1);
 
 for i = 1:m

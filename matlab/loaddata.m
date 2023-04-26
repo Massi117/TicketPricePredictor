@@ -24,13 +24,17 @@ X.price = [];
 [m,d] = size(X);
 shuffle = randperm(m);
 mte = ceil(0.2*m);
-mtr = m-mte;
+mtr = m-(2*mte);
 
 % Create training data
 Xtr = X(shuffle(1:mtr),:);
 ytr = y(shuffle(1:mtr));
 
 % Create testing data
-Xte = X(shuffle(mtr+1:m),:);
-yte = y(shuffle(mtr+1:m));
+Xte = X(shuffle(mtr+1:mtr+mte),:);
+yte = y(shuffle(mtr+1:mtr+mte));
+
+% Create validation data
+Xval = X(shuffle(mtr+mte+1:m),:);
+yval = y(shuffle(mtr+mte+1:m));
 

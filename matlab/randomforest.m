@@ -6,30 +6,33 @@ loaddata;
 
 %% Define dimensions
 [m,d] = size(Xtr);
-T = 10;                         % # of trees in random forest
-mtest = size(Xte,1);
+T = 25;                         % # of trees in random forest
+mtest = size(Xval,1);
+classes = varfun(@class,Xte,'OutputFormat','cell');
+Xval2 = table2cell(Xval);
 
 % Select a subsample with replacement (boostraping)
-mt = ceil(m/1000);               % # of samples used per tree
+mt = ceil(m/50);               % # of samples used per tree
 theta = randi(m,mt,T);
 
-% Feature selection
-num_feat = ceil(sqrt(d));       % # of featues used per tree
-feat = randi(d,num_feat,T);
+% # of featues used per tree
+num_feat = d;       
 
 % Build and train the random forrest
-DTCell = cell(T,1);             % Initilize the forrest
+DTCell = cell(T,1);             % Initilize the forrests
 predictions = zeros(mtest,T);   % Initilize predictions
 
 for i = 1:T
     % Bootstraping and feature selection
-    Xi = Xtr(theta(:,i),feat(:,i));
+    feat = 1:d;%randsample(d,num_feat);
+    Xi = Xtr(theta(:,i),feat);
     yi = ytr(theta(:,i));
-
-    DTCell{i} = rtree(Xi, yi, 0, 10, 10);
+    
+    weights = 1/numel(yi);
+    DTCell{i} = rtree(Xi, yi, 0, 30, 5, weights);
     
     % Get predictions
-    predictions(:,i) = tree_predict(DTCell{i}, Xte(:,feat(:,i)));
+    predictions(:,i) = tree_predict(DTCell{i}, Xval2(:,feat), classes(feat));
     disp(i)
 end
 
@@ -37,6 +40,6 @@ end
 yhat = mean(predictions,2);
 
 % Compute accuracy
-error = mse(yhat, yte);
-fprintf('Error: %.2f\n', error);
+error = mse(yhat, yval);
+fprintf('RMSE: %.2f\n', sqrt(error));
 
