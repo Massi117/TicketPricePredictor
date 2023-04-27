@@ -48,7 +48,8 @@ function tree = rtree(X, y, depth, max_depth, min_samples_leaf, weights)
         for j = 1:numel(values)
             % Split the data
             if iscat
-                right_idx = X.(i) == values(j);
+                values = string(values);
+                right_idx = string(X.(i)) == values(j);
                 left_idx = ~right_idx;
             else
                 right_idx = X.(i) >= values(j);
@@ -85,7 +86,7 @@ function tree = rtree(X, y, depth, max_depth, min_samples_leaf, weights)
     end
 
     % No better way to split the data
-    if best_mse_reduction == -Inf
+    if best_mse_reduction < 0
         tree.value = mean(y);
         tree.is_leaf = true;
         %disp('no better split')

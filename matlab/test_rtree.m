@@ -4,23 +4,23 @@ close all
 
 % Load data
 loaddata
-
-%% Compare with best
-TREE = fitrtree(Xtr,ytr,'MaxNumSplits',30,'MinLeafSize',5,'Prune','off');
+Xtr = Xtr(1:10000,:);
+ytr = ytr(1:10000);
+Xtr2 = Xtr2(1:10000,:);
 
 %% Make the tree
 weights = 1/numel(ytr);
-tree = rtree(Xtr, ytr, 0, 30, 5, weights);
+tree = rtree(Xtr, ytr, 0, 50, 1, weights);
 
-%% Make predictions
-yhat = predict(TREE, Xte);
-classes = varfun(@class,Xte,'OutputFormat','cell');
-Xte2 = table2cell(Xte);
-y_pred = tree_predict(tree, Xte2,classes);
+% Get training error
+ytr_pred = tree_predict(tree,Xtr2);
+tr_error = mse(ytr_pred, ytr);
+fprintf('Training RMSE: %.2f\n', sqrt(tr_error));
+
+%% Test DT
+y_pred = tree_predict(tree,Xval);
 
 % Compute accuracy
-error = mse(y_pred, yte);
-ERROR = mse(yhat, yte);
-fprintf('RMSE: %.2f\n', sqrt(error));
-fprintf('RMSE of best: %.2f\n', sqrt(ERROR));
+error = mse(y_pred, yval);
+fprintf('Test RMSE: %.2f\n', sqrt(error));
 

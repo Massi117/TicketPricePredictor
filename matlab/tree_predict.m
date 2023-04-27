@@ -1,4 +1,4 @@
-function y_pred = tree_predict(tree, X, classes)
+function y_pred = tree_predict(tree, X)
 % Predict the class labels of the test data using the decision tree
 
 % Inputs:
@@ -14,8 +14,8 @@ y_pred = zeros(m, 1);
 for i = 1:m
     node = tree;
     while ~node.is_leaf
-        if strcmp(classes{node.col_index},'categorical')
-            if X{i,node.col_index} ~= node.split
+        if isa(X{1,node.col_index}, 'string')
+            if string(X{i,node.col_index}) ~= node.split(1)
                 node = node.left;
             else
                 node = node.right;

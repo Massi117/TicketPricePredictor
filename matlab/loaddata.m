@@ -23,18 +23,51 @@ X.price = [];
 % Separate into training and testing data
 [m,d] = size(X);
 shuffle = randperm(m);
-mte = ceil(0.2*m);
-mtr = m-(2*mte);
+mte = ceil(0.35*m);
+mtr = m-floor(0.4*m);
 
-% Create training data
-Xtr = X(shuffle(1:mtr),:);
-ytr = y(shuffle(1:mtr));
-
-% Create testing data
-Xte = X(shuffle(mtr+1:mtr+mte),:);
-yte = y(shuffle(mtr+1:mtr+mte));
+% Create test data
+Xte = X(shuffle(1:mtr),:);
+yte = y(shuffle(1:mtr));
 
 % Create validation data
-Xval = X(shuffle(mtr+mte+1:m),:);
-yval = y(shuffle(mtr+mte+1:m));
+Xval = X(shuffle(mtr+1:mtr+mte),:);
+yval = y(shuffle(mtr+1:mtr+mte));
 
+% Create training data
+Xtr = X(shuffle(mtr+mte+1:m),:);
+ytr = y(shuffle(mtr+mte+1:m));
+
+% Prepare Training Error Data
+Xtr2 = table2cell(Xtr);
+
+for i = 1:size(Xtr2,2)
+    if isa(Xtr2{1,i}, 'categorical')
+        for j = 1:size(Xtr2,1)
+            Xtr2{j,i} = string(Xtr2{j,i});
+        end
+    end
+end
+
+% Prepare Validation Data
+classes = varfun(@class,Xte,'OutputFormat','cell');
+Xval = table2cell(Xval);
+
+for i = 1:size(Xval,2)
+    if isa(Xval{1,i}, 'categorical')
+        for j = 1:size(Xval,1)
+            Xval{j,i} = string(Xval{j,i});
+        end
+    end
+end
+
+% Prepare test Data
+Xte = table2cell(Xte);
+
+for i = 1:size(Xte,2)
+    if isa(Xte{1,i}, 'categorical')
+        for j = 1:size(Xte,1)
+            Xte{j,i} = string(Xte{j,i});
+        end
+    end
+end
