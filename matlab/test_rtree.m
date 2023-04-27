@@ -24,3 +24,5 @@ y_pred = tree_predict(tree,Xval);
 error = mse(y_pred, yval);
 fprintf('Test RMSE: %.2f\n', sqrt(error));
 
+plot_rtree(tree, Xtr.Properties.VariableNames);
+
