@@ -41,7 +41,7 @@ function tree = rtree(X, y, depth, max_depth, min_samples_leaf, weights)
         % Find unique values to split over
         values = unique(X.(i));
 
-        % Determine if data is categorical
+        % Determine if data is caategorical
         iscat = strcmp(classes{i},'categorical');
 
         % Calculate the mse reduction of splitting on value j

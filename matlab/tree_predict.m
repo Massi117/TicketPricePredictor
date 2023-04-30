@@ -14,7 +14,7 @@ y_pred = zeros(m, 1);
 for i = 1:m
     node = tree;
     while ~node.is_leaf
-        if isa(X{1,node.col_index}, 'string')
+        if isa(X{1,node.col_index}, 'categorical')
             if string(X{i,node.col_index}) ~= node.split(1)
                 node = node.left;
             else

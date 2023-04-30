@@ -1,17 +1,20 @@
 function DTCell = train_gradientboosted_dt(Xtr, ytr, n_trees, alpha, depth, max_depth, min_samples_leaf)
     % Initialize DT
     DTCell = cell(n_trees,1);
-    residuals = mean(ytr) - ytr;
-    weights = 1/numel(ytr);
+    residuals = zeros(size(ytr));
     
-    DTCell{1} = rtree(Xtr, residuals, depth, max_depth, min_samples_leaf, weights);
+    DTCell{1} = rtree(Xtr, residuals, depth, max_depth, min_samples_leaf);
     y_pred = tree_predict(DTCell{1}, Xtr);
     
     for i = 2:n_trees
         residuals = ytr - y_pred;
+        
+        weights = 1/size(ytr);
+
         tree = rtree(Xtr, residuals, depth, max_depth, min_samples_leaf, weights);
-        y_pred = y_pred + alpha * tree_predict(tree, Xtr);
+        
+        y_pred = y_pred + alpha * tree_predict(tree, Xtr); % add the predictions up with the results from training on residuals
+        
         DTCell{i} = tree;
-        weights = weights .* exp(-alpha * ytr .* tree_predict(tree, Xtr));
     end
 end
