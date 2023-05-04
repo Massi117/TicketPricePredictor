@@ -1,0 +1,50 @@
+\begin{thebibliography}{1}
+
+\bibitem{Alkhoury}
+Sami Alkhoury, Emilie Devijver, Marianne Clausel, Myriam Tami, Eric Gaussier,
+  and georges Oppenheim.
+\newblock Smooth and consistent probabilistic regression trees.
+\newblock In H.~Larochelle, M.~Ranzato, R.~Hadsell, M.F. Balcan, and H.~Lin,
+  editors, {\em Advances in Neural Information Processing Systems}, volume~33,
+  pages 11345--11355. Curran Associates, Inc., 2020.
+
+\bibitem{Maksym}
+Maksym Andriushchenko and Matthias Hein.
+\newblock Provably robust boosted decision stumps and trees against adversarial
+  attacks.
+\newblock In H.~Wallach, H.~Larochelle, A.~Beygelzimer, F.~d\textquotesingle
+  Alch\'{e}-Buc, E.~Fox, and R.~Garnett, editors, {\em Advances in Neural
+  Information Processing Systems}, volume~32. Curran Associates, Inc., 2019.
+
+\bibitem{Breiman}
+Leo Breiman.
+\newblock Random forests.
+\newblock In {\em Machine Learning}, volume~45, pages 5–--32. Kluwer Academic
+  Publishers, 2001.
+
+\bibitem{kaggle}
+Leo Breiman.
+\newblock Random forests.
+\newblock In H.~Larochelle, M.~Ranzato, R.~Hadsell, M.F. Balcan, and H.~Lin,
+  editors, {\em Machine Learning}, volume~25, pages 5–--32. Kluwer Academic
+  Publishers, 2001.
+
+\bibitem{Feng}
+Ji~Feng, Yang Yu, and Zhi-Hua Zhou.
+\newblock Multi-layered gradient boosting decision trees.
+\newblock In S.~Bengio, H.~Wallach, H.~Larochelle, K.~Grauman, N.~Cesa-Bianchi,
+  and R.~Garnett, editors, {\em Advances in Neural Information Processing
+  Systems}, volume~31. Curran Associates, Inc., 2018.
+
+\bibitem{Kleinberg}
+Eugene~M. Kleinberg.
+\newblock An overtraining-resistant stochastic modeling method for pattern
+  recognition.
+\newblock {\em Annals of Statistics}, 24:2319--2349, 1996.
+
+\bibitem{Luo}
+Haoran Luo, Fan Cheng, Heng Yu, and Yuqi Yi.
+\newblock Sdtr: Soft decision tree regressor for tabular data.
+\newblock {\em IEEE Access}, 9:55999--56011, 2021.
+
+\end{thebibliography}

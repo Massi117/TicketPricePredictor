@@ -3,24 +3,27 @@
 
 % if you need to pass options to natbib, use, e.g.:
 %     \PassOptionsToPackage{numbers, compress}{natbib}
-% before loading neurips_2022
+% before loading neurips_2023
 
+% for algorithm
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 % ready for submission
-\usepackage{neurips_2022}
+\usepackage[final]{neurips_2023}
 
 
 % to compile a preprint version, e.g., for submission to arXiv, add add the
 % [preprint] option:
-%     \usepackage[preprint]{neurips_2022}
+%     \usepackage[preprint]{neurips_2023}
 
 
 % to compile a camera-ready version, add the [final] option, e.g.:
-%     \usepackage[final]{neurips_2022}
+%     \usepackage[final]{neurips_2023}
 
 
 % to avoid loading the natbib package, add option nonatbib:
-%    \usepackage[nonatbib]{neurips_2022}
+%    \usepackage[nonatbib]{neurips_2023}
 
 
 \usepackage[utf8]{inputenc} % allow utf-8 input
@@ -32,9 +35,12 @@
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
 \usepackage{xcolor}         % colors
+\usepackage{graphicx}       % allows images
+
+\graphicspath{ {./images/} }
 
 
-\title{Formatting Instructions For NeurIPS 2022}
+\title{Predicting Fluctuating Commodity Prices using Random Forests}
 
 
 % The \author macro works with any number of authors. There are two commands
@@ -45,36 +51,37 @@
 % authors names on the first line, and the last on the second line, try using
 % \AND instead of \And before the third author name.
 
-
-\author{%
-  David S.~Hippocampus\thanks{Use footnote for providing further information
-    about author (webpage, alternative address)---\emph{not} for acknowledging
-    funding agencies.} \\
-  Department of Computer Science\\
-  Cranberry-Lemon University\\
-  Pittsburgh, PA 15213 \\
-  \texttt{hippo@cs.cranberry-lemon.edu} \\
+\author{
+  Bosli, Massinissa \\
+  EC 503 Student\\
+  Boston University\\
+  Boston, MA 02215 \\
+  \texttt{myb24@bu.edu} \\
   % examples of more authors
-  % \And
-  % Coauthor \\
-  % Affiliation \\
-  % Address \\
-  % \texttt{email} \\
-  % \AND
-  % Coauthor \\
-  % Affiliation \\
-  % Address \\
-  % \texttt{email} \\
-  % \And
-  % Coauthor \\
-  % Affiliation \\
-  % Address \\
-  % \texttt{email} \\
-  % \And
-  % Coauthor \\
-  % Affiliation \\
-  % Address \\
-  % \texttt{email} \\
+  \And
+  Jamias, Austin \\
+  EC 503 Student\\
+  Boston University\\
+  Boston, MA 02215 \\
+  \texttt{ajamias@bu.edu} \\
+  \AND
+  Ehrlich, Ben \\
+  EC 503 Student\\
+  Boston University\\
+  Boston, MA 02215 \\
+  \texttt{behrlich@bu.edu} \\
+  \And
+  Bensadon, Moises \\
+  EC 503 Student\\
+  Boston University\\
+  Boston, MA 02215 \\
+  \texttt{moises@bu.edu} \\
+  \And
+  Yadav, Mayank \\
+  EC 503 Student\\
+  Boston University\\
+  Boston, MA 02215 \\
+  \texttt{mayanky@bu.edu} \\
 }
 
 
@@ -85,505 +92,290 @@
 
 
 \begin{abstract}
-  The abstract paragraph should be indented \nicefrac{1}{2}~inch (3~picas) on
-  both the left- and right-hand margins. Use 10~point type, with a vertical
-  spacing (leading) of 11~points.  The word \textbf{Abstract} must be centered,
-  bold, and in point size 12. Two line spaces precede the abstract. The abstract
-  must be limited to one paragraph.
+In this paper, we present an analysis of a variety of methods using decision and regression trees to predict commodity prices. The aim of the study is to compare the different ways one can use trees to develop an accurate and efficient model for price prediction that can be applied for various commodities such as airline tickets, food prices, etc. We used a dataset of over 300,000 airline tickets to train decision trees \& random forests of various sizes. We found the random forest model performed the best out of the chosen models and was able to outperform a singular decision tree consistently on the test and validation data. The reasonable errors reported show that a random forest model has the potential to make accurate price predictions.
 \end{abstract}
 
 
-\section{Submission of papers to NeurIPS 2022}
+\section{Introduction}
+
+With the abundance of data in today's day and age, there is an increasing amount of uncertainty about the data without the correct tools to interpret it. It can be difficult to predict the fluctuating prices of resources such as airline tickets without the right tools and information. There exists machine learning models that do just this through supervised learning. However, with categorical data the basic regression problem becomes ineffective. The decision tree is one solution that we examined because it provides support for categorical variables. Since there were many ways to implement a decision tree, we decided to test and compare the performances between a selection of chosen models. We searched for the model with the best test accuracy among the decision trees \& random forests. Although many Kaggle competition winners utilized boosting as their main method of training, we hypothesized that random forests would perform the best because current theories suggest that they reduce over-fitting in decision tree. 
+
+Other papers exist of varying quality aimed at solving this problem, but many previous attempts have not solved the problem with low enough error, or were strictly theoretical and lacked empirical testing, or missed the right complexity for the problem of flight ticket price prediction. With this paper, we hope to approach the problem in a robust way, resulting in a procedure proven to work, which could be retrained on different regions, commodities, etc with minimal effort.
 
 
-Please read the instructions below carefully and follow them faithfully.
-
-
-\subsection{Style}
-
-
-Papers to be submitted to NeurIPS 2022 must be prepared according to the
-instructions presented here. Papers may only be up to {\bf nine} pages long,
-including figures. Additional pages \emph{containing only acknowledgments and
-references} are allowed. Papers that exceed the page limit will not be
-reviewed, or in any other way considered for presentation at the conference.
-
-
-The margins in 2022 are the same as those in 2007, which allow for $\sim$$15\%$
-more words in the paper compared to earlier years.
-
-
-Authors are required to use the NeurIPS \LaTeX{} style files obtainable at the
-NeurIPS website as indicated below. Please make sure you use the current files
-and not previous versions. Tweaking the style files may be grounds for
-rejection.
-
-
-\subsection{Retrieval of style files}
-
-
-The style files for NeurIPS and other conference information are available on
-the World Wide Web at
-\begin{center}
-  \url{http://www.neurips.cc/}
-\end{center}
-The file \verb+neurips_2022.pdf+ contains these instructions and illustrates the
-various formatting requirements your NeurIPS paper must satisfy.
-
-
-The only supported style file for NeurIPS 2022 is \verb+neurips_2022.sty+,
-rewritten for \LaTeXe{}.  \textbf{Previous style files for \LaTeX{} 2.09,
-  Microsoft Word, and RTF are no longer supported!}
-
-
-The \LaTeX{} style file contains three optional arguments: \verb+final+, which
-creates a camera-ready copy, \verb+preprint+, which creates a preprint for
-submission to, e.g., arXiv, and \verb+nonatbib+, which will not load the
-\verb+natbib+ package for you in case of package clash.
-
-
-\paragraph{Preprint option}
-If you wish to post a preprint of your work online, e.g., on arXiv, using the
-NeurIPS style, please use the \verb+preprint+ option. This will create a
-nonanonymized version of your work with the text ``Preprint. Work in progress.''
-in the footer. This version may be distributed as you see fit. Please \textbf{do
-  not} use the \verb+final+ option, which should \textbf{only} be used for
-papers accepted to NeurIPS.
-
-
-At submission time, please omit the \verb+final+ and \verb+preprint+
-options. This will anonymize your submission and add line numbers to aid
-review. Please do \emph{not} refer to these line numbers in your paper as they
-will be removed during generation of camera-ready copies.
-
-
-The file \verb+neurips_2022.tex+ may be used as a ``shell'' for writing your
-paper. All you have to do is replace the author, title, abstract, and text of
-the paper with your own.
-
-
-The formatting instructions contained in these style files are summarized in
-Sections \ref{gen_inst}, \ref{headings}, and \ref{others} below.
-
-
-\section{General formatting instructions}
+\section{Related Works}
 \label{gen_inst}
 
+\subsection{Decision Trees}
 
-The text must be confined within a rectangle 5.5~inches (33~picas) wide and
-9~inches (54~picas) long. The left margin is 1.5~inch (9~picas).  Use 10~point
-type with a vertical spacing (leading) of 11~points.  Times New Roman is the
-preferred typeface throughout, and will be selected for you by default.
-Paragraphs are separated by \nicefrac{1}{2}~line space (5.5 points), with no
-indentation.
+Widely used in a range of applications, Decision Trees became highly popular thanks to their simplicity and human-interpretability. When boosted, DT are provably robust against adversarial attacks \cite{Maksym}, and are highly efficient. They are understood widely interpreting categorical data, but also have uses with some loosening of constraints for mixed and numerical datasets. Instead of creating branches to increase purity, branches are created to minimize mean squared error and have seen provable and empirical success \cite{Luo}.
 
+\subsection{Gradient Boosted Decision Trees (GBDT)}
 
-The paper title should be 17~point, initial caps/lower case, bold, centered
-between two horizontal rules. The top rule should be 4~points thick and the
-bottom rule should be 1~point thick. Allow \nicefrac{1}{4}~inch space above and
-below the title to rules. All pages should start at 1~inch (6~picas) from the
-top of the page.
+Feng et al. discuss more in-depth the application of gradient boosted decision trees for multi-layer models used in many deep learning applications \cite{Feng}. Described in the paper, MLGBDT extends traditional gradient boosting methods by adding additional layers of decision trees, where each layer learns the residuals of the previous layer. Unlike AdaBoost, GBDT trains an ensemble of trees by feeding the residuals of the previous tree as labels to the next tree with the aim of learning all the residuals and summing to a more accurate prediction. Feng et al. introduce MLGBDT that train independent GBDTs on different subsets on the data then output a weighted average. While the paper is primarily focused on DL, it does a decent job at summarizing the development of uses of boosted decision trees (DT) in multiple applications, discussing uses in Marketing, Quantum Physics, and Data Science. 
 
+\subsection{Random Forest Ensembles (RF)}
 
-For the final version, authors' names are set in boldface, and each name is
-centered above the corresponding address. The lead author's name is to be listed
-first (left-most), and the co-authors' names (if different address) are set to
-follow. If there is only one co-author, list both author and co-author side by
-side.
+Random forests are an ensemble of tree predictors each trained with a random sampling from the feature set and training set. While there are arguably many ways to approach the growth of trees in the forest, the first researchers to propose them used them in a way similar to AdaBoost.  Due to the random nature of trees, the generalization of the ensemble tends to be greater than other methods. This resistance to over-fitting in a general sense is discussed in Kleinberg's 1996 paper \cite{Kleinberg}. Stochastic models' performance drop tends to be smaller than analogous learning models without the stochastic elements when given huge amounts of data, implying a type of resistance to over-fitting. Random forests have resulted in significant improvements in classification accuracy by growing an ensemble of trees and letting them vote for the most popular class.
 
-
-Please pay special attention to the instructions in Section \ref{others}
-regarding figures, tables, acknowledgments, and references.
-
-
-\section{Headings: first level}
+\section{Proposed Methods}
 \label{headings}
 
+\subsection{Regression Tree}
 
-All headings should be lower case (except for first word and proper nouns),
-flush left, and bold.
+The decision tree is a well-known algorithm that is relatively simple to comprehend. At its core, the algorithm comprises a series of decision stumps, which continue to divide the data using a basic splitting rule. Consider an input \(x\) with \(d\) features. Based on the root node's splitting rule, which is based on one of the \(d\) features, \(x\) is assigned to one of the two child nodes. These child nodes, in turn, have their own splitting rules that dictate the assignment of \(x\) to their child nodes. This recursive process continues until \(x\) reaches a node without child nodes or splitting rules, which is denoted as a leaf. This leaf node is assigned a label, which is used to predict the output of \(x\). Figure 1 illustrates this process.
 
-
-First-level headings should be in 12-point type.
-
-
-\subsection{Headings: second level}
-
-
-Second-level headings should be in 10-point type.
-
-
-\subsubsection{Headings: third level}
-
-
-Third-level headings should be in 10-point type.
-
-
-\paragraph{Paragraphs}
-
-
-There is also a \verb+\paragraph+ command available, which sets the heading in
-bold, flush left, and inline with the text, with the heading followed by 1\,em
-of space.
-
-
-\section{Citations, figures, tables, references}
-\label{others}
-
-
-These instructions apply to everyone.
-
-
-\subsection{Citations within the text}
-
-
-The \verb+natbib+ package will be loaded for you by default.  Citations may be
-author/year or numeric, as long as you maintain internal consistency.  As to the
-format of the references themselves, any style is acceptable as long as it is
-used consistently.
-
-
-The documentation for \verb+natbib+ may be found at
-\begin{center}
-  \url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
-\end{center}
-Of note is the command \verb+\citet+, which produces citations appropriate for
-use in inline text.  For example,
-\begin{verbatim}
-   \citet{hasselmo} investigated\dots
-\end{verbatim}
-produces
-\begin{quote}
-  Hasselmo, et al.\ (1995) investigated\dots
-\end{quote}
-
-
-If you wish to load the \verb+natbib+ package with options, you may add the
-following before loading the \verb+neurips_2022+ package:
-\begin{verbatim}
-   \PassOptionsToPackage{options}{natbib}
-\end{verbatim}
-
-
-If \verb+natbib+ clashes with another package you load, you can add the optional
-argument \verb+nonatbib+ when loading the style file:
-\begin{verbatim}
-   \usepackage[nonatbib]{neurips_2022}
-\end{verbatim}
-
-
-As submission is double blind, refer to your own published work in the third
-person. That is, use ``In the previous work of Jones et al.\ [4],'' not ``In our
-previous work [4].'' If you cite your other papers that are not widely available
-(e.g., a journal paper under review), use anonymous author names in the
-citation, e.g., an author of the form ``A.\ Anonymous.''
-
-
-\subsection{Footnotes}
-
-
-Footnotes should be used sparingly.  If you do require a footnote, indicate
-footnotes with a number\footnote{Sample of the first footnote.} in the
-text. Place the footnotes at the bottom of the page on which they appear.
-Precede the footnote with a horizontal rule of 2~inches (12~picas).
-
-
-Note that footnotes are properly typeset \emph{after} punctuation
-marks.\footnote{As in this example.}
-
-
-\subsection{Figures}
-
-
-\begin{figure}
-  \centering
-  \fbox{\rule[-.5cm]{0cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
-  \caption{Sample figure caption.}
+\begin{figure}[h]
+\caption{Visualization of Decision Tree construction}
+\centering
+\includegraphics[width=0.85\textwidth]{Fig1}
 \end{figure}
 
+The construction of such a tree, also termed “growing," is performed utilizing a top-down “greedy” approach. Starting from the root node, splitting rules are decided and made on all of the training data, resulting in two child nodes, the recursive process repeats on each of the child nodes until no split is possible, or a set condition has been met. The “greediness” of this algorithm derives from the approach used to decide on a splitting rule. The splitting rule of the decision stump at each node is designed to reduce the uncertainty of the split. This is usually done by measuring the uncertainty of splitting on every unique value of every feature on the training data S. The whole procedure is summarized in Algorithm 1.
 
-All artwork must be neat, clean, and legible. Lines should be dark enough for
-purposes of reproduction. The figure number and caption always appear after the
-figure. Place one line space before the figure caption and one line space after
-the figure. The figure caption should be lower case (except for first word and
-proper nouns); figures are numbered consecutively.
+The measure of uncertainty of a split can be measured in a plethora of ways. In the case of classification, popular methods of measuring the uncertainty are the gini impurity and entropy. Gini impurity measures the degree or probability of miss-classification, while entropy measures the degree of disorder or randomness in a data set. Both measures of uncertainty are however incompatible with a regression problem, which is the focus here. Thus other methods are employed to measure the uncertainty, such as the reduction in the mean squared error (MSE reduction). The mean squared error of each node is a sum of the squared distance between all the data in the node and their labels multiplied by the weight of each sample
+
+\begin{equation}
+f(n) = \sum_{i=1}^m{P(i)(\hat{y}_{n} - y_{i})^2}
+\end{equation}
+
+The probability of each node occurring is calculated to be the sum of the weights of the samples in the node
+
+\begin{equation}
+W_{n} = \sum_{i=1}^m{P(i)}
+\end{equation}
+
+The MSE reduction is just the difference between the MSE of the parent node \(p\) and its two child nodes \(a\) and \(b\) all proportional to their probabilities. The resulting objective function is the maximization of the MSE reduction for each split \(g\)
+
+\begin{equation}
+\arg \max_{g}   W_{n_{p}}f(n_{p}) - W_{n_{a}}*f(n_{a}) - W_{n_{b}}*f(n_{b})
+\end{equation}
+
+As shown in Algorithm 1, this maximization of the MSE reduction is computed by computing the MSE reduction on all possible splits for each node. It is worth noting that in the context of real-world data, features of the data are rarely just continuous or categorical, but usually a mixture of both. This poses a potential challenge in deciding a splitting rule as a splitting rule for continuous data is not usually compatible with categorical data. The splitting rule must then change depending on the type of data each feature presents. In the case of continuous data, a decision stump splits according to a specified value to which samples are split whether their feature is above or below the value. Categorical data, on the other hand, a one-vs-all method is utilized.
+
+Traditionally, a decision or regression tree will stop splitting the nodes when under certain conditions. The application of these predetermined conditions is called pre-pruning; its aim is to reduce the over-fitting of the tree. In our implementation of a regression, no conditions were applied. The availability of such a large data set reduced the chance of over-fitting.
+
+\begin{algorithm}[ht]
+\caption{Top-Down Greedy Decision Tree Algorithm (CART)}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Sample $S$ of $m$ points with $d$ features
+\State \textbf{Initialization:} Root Node contains all training data $m$
+\Procedure{DecisionTree}{$node$}
+    \If{node meets termination conditions}
+        \State set $node \to$ leaf with a label and end
+    \EndIf
+    \ForAll{features $d$}
+        \ForAll{$j$ unique values in features $d$}
+            \State split data on feature $j$
+            \State calculate uncertainty
+            \State find $j$ with min uncertainty
+        \EndFor
+    \EndFor
+    \State split nodes of features $d$ by value $j$
+    \State repeat for each child node
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Ensemble Methods:}
+
+The tendency of decision trees, including regression trees, to over-fit is one of the reasons the algorithm is usually used in ensemble. A variety of ensemble methods exist, but Breiman’s application of Random Forests and his conjecture that AdaBoost is a random forest made this ensemble method extremely appealing \cite{Breiman}.
+
+\subsubsection{Random Forests}
+
+Our implementation of a Random Forrest is very similar to Breiman’s approach. Multiple decision trees are built using the top-down “greedy” algorithm. A different sub-sample of the training data was taken with replacement and used to train each tree. Breiman also used a set of random features k for each tree in the forest. Our approach neglected to add this layer of stochasticity as we found that it only increased the validation error. Once each decision tree is constructed, the prediction of the forest is, in the case of regression, the mean of the predictions of all the trees. The procedure for this implementation is shown in Algorithm 2.
+
+The number of trees, denoted T, is the only hyper-parameter utilized in our implementation of a random forest. Breiman theorizes that the generalization error is upper-bounded as such as T approaches infinity \cite{Breiman}.
+
+It is important to note that although using a maximum number of trees seems like a reasonable method to continue, the construction of each tree takes $O(n m \cdot{} \log(n))$ time. So growing a random forest will take $O(T \cdot{} n m \cdot{} \log(n))$. As a result, the optimal T is one where the generalization error ceases to decrease significantly with respect to the time complexity. This optimal T will be found using validation data.
 
 
-You may use color figures.  However, it is best for the figure captions and the
-paper body to be legible if the paper is printed in either black/white or in
-color.
+\begin{algorithm}[ht]
+\caption{Growing a Random Forest}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Sample $S$ of $m$ points with $d$ features
+\For{$I = 1, 2, 3, \dots, T$} \Comment{$T$ is the number of trees (hyperparameter)}
+    \State Generate a random variable $\theta$ by sampling $S$ with replacement
+    \State Choose $k$ random features (either $k = \sqrt{d}$ or $k = \log{d}$)
+    \State Grow a decision tree (Top-Down Greedy Algorithm) on $\theta$ with $K$ features
+\EndFor
+\State \textbf{Output:} Predictions are the mean or mode of all decision tree predictions
+\end{algorithmic}
+\end{algorithm}
 
 
-\subsection{Tables}
 
 
-All tables must be centered, neat, clean and legible.  The table number and
-title always appear before the table.  See Table~\ref{sample-table}.
+\section{Results}
+\label{others}
 
+All models in our experimentation were trained using a dataset of over 300,000 data points from Kaggle \cite{kaggle}. This data was taken from the website “Ease My Trip” over the course of 50 days: February 11th to March 31st, 2022. Each data point consisted of ten features and the label which was the price of the ticket. A breakdown of the dataset can be found in Table 1 \& Table 2.
 
-Place one line space before the table title, one line space after the
-table title, and one line space after the table. The table title must
-be lower case (except for first word and proper nouns); tables are
-numbered consecutively.
-
-
-Note that publication-quality tables \emph{do not contain vertical rules.} We
-strongly suggest the use of the \verb+booktabs+ package, which allows for
-typesetting high-quality, professional tables:
-\begin{center}
-  \url{https://www.ctan.org/pkg/booktabs}
-\end{center}
-This package was used to typeset Table~\ref{sample-table}.
-
-
-\begin{table}
-  \caption{Sample table title}
+\begin{table}[ht]
+  \caption{Data set Features}
   \label{sample-table}
   \centering
   \begin{tabular}{lll}
     \toprule
-    \multicolumn{2}{c}{Part}                   \\
-    \cmidrule(r){1-2}
-    Name     & Description     & Size ($\mu$m) \\
+    Feature     & Data Type     & \# of classes \\
     \midrule
-    Dendrite & Input terminal  & $\sim$100     \\
-    Axon     & Output terminal & $\sim$10      \\
-    Soma     & Cell body       & up to $10^6$  \\
+    Airline     & Categorical   & 6     \\
+    Flight      & N/A   & N/A     \\
+    Source City & Categorical   & 6     \\
+    Departure Time  & Categorical   & 6     \\
+    Stops       & Categorical   & 3     \\
+    Arrival Time    & Categorical   & 6     \\
+    Destination City    & Categorical   & 6     \\
+    Class   & Categorical   & 2     \\
+    Duration    & Continuous   & N/A    \\
+    Days Left   & Continuous   & N/A     \\
+    \midrule
+    Price       & Continuous   & N/A     \\
+
     \bottomrule
   \end{tabular}
 \end{table}
 
+\begin{table}[h]
+  \caption{Data set Partitions}
+  \label{sample-table}
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    Partition       & \# of Points \\
+    \midrule
+    Training        & 10000 \\
+    Validation      & 50000 \\
+    Test            & 240153 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
-\section{Final instructions}
+To get a complete picture of the data set, a histogram of the data was taken (Figure 2). The results show that the prices of the tickets are centered around two means, with the majority of the prices around 100 dollars.
 
+\begin{figure}[ht]
+\caption{Histogram of Prices in Data set}
+\centering
+\includegraphics[width=0.7\textwidth]{Fig2}
+\end{figure}
 
-Do not change any aspects of the formatting parameters in the style files.  In
-particular, do not modify the width or length of the rectangle the text should
-fit into, and do not change font sizes (except perhaps in the
-\textbf{References} section; see below). Please note that pages should be
-numbered.
+\subsection{Baseline Error}
 
+In these regression problems, the error is measured using the mean squared error (MSE). Measuring the error in such a way is less intuitive than measuring the percent accuracy or error of classification problems. For example, a root mean squared error (RMSE) of 5 tells us that, on average, the prediction price is about 5 dollars off the true price. This measure results in different conclusions depending on the data. If the prices range in the hundreds of dollars then an average error of 5 is pretty reasonable. The opposite would be true if the price range was around 5 dollars.
 
-\section{Preparing PDF files}
+We combat this confusion in two ways. First, we design the most basic decision tree and compare its RMSE against the models of our design. The most basic decision tree consists of a single node with a prediction of just the mean of all the data points. Such a predictor returns an RMSE of 276.84 on the test set. Another method to show the accuracy of the predictors is to graph the percent error of the predictions, which allows for a better understanding of how far off the data our predictors are.
 
+\subsection{Regression Tree Results}
 
-Please prepare submission files with paper size ``US Letter,'' and not, for
-example, ``A4.''
+The construction of the singular regression tree was completed using a recursive structure in MATLAB. Each structure would correspond to a node and would call two child nodes as two of its elements. The recursive call of a function builds the tree according to the top-down standard CART algorithm discussed. The tree was constructed with the only stopping condition being if the MSE reduction was less than or equal to zero. At the completion of tree construction, a visual representation of the tree was produced using MATLAB's directed graphs (Figure 3). The abundance of splits and nodes indicates that this tree is in danger of over-fitting the test set.
 
+\begin{figure}[ht]
+\caption{Visualization of the Regression Tree}
+\centering
+\includegraphics[width=0.85\textwidth]{Fig3}
+\end{figure}
 
-Fonts were the main cause of problems in the past years. Your PDF file must only
-contain Type 1 or Embedded TrueType fonts. Here are a few instructions to
-achieve this.
+The reported training RMSE of the regression tree was significantly lower than the test RMSE. This confirms that the tree is over-fitting the data, but that was to be expected from a tree with no pre-pruning. Compared to the most simple regression tree, the new model performed extremely well.
 
+\begin{table}[ht]
+  \caption{Regression Tree Results}
+  \label{sample-table}
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    Model     & RMSE \\
+    \midrule
+    Single Node Test RMSE   &  276.84     \\
+    Training RMSE       & 55.74       \\
+    Test RMSE           & 70.27      \\
 
-\begin{itemize}
+    \bottomrule
+  \end{tabular}
+\end{table}
 
+A histogram of the data gives a better understanding of how far off the predictions were from their corresponding true values. According to Figure 4, the vast majority of the data was only about 10 percent off the true value.
 
-\item You should directly generate PDF files using \verb+pdflatex+.
+\begin{figure}[ht]
+\caption{Histogram of \% Difference (Regression Tree)}
+\centering
+\includegraphics[width=0.7\textwidth]{Fig4}
+\end{figure}
 
+\subsection{Random Forest Results}
 
-\item You can check which fonts a PDF files uses.  In Acrobat Reader, select the
-  menu Files$>$Document Properties$>$Fonts and select Show All Fonts. You can
-  also use the program \verb+pdffonts+ which comes with \verb+xpdf+ and is
-  available out-of-the-box on most Linux machines.
+The random forest was implemented as Algorithm 2 described. To find an optimal T, validation was run on a set of random forests with increasing T from 20 to 70. Breiman states that the upper bound on the test error decreases with an increase in T, so running this validation serves two purposes: confirmation of the theory, and the measure of the cost of computation \cite{Breiman}. The larger T becomes, the higher the computational complexity of the algorithm. It is, for this reason, massive amounts of trees (on the order of hundreds or thousands) cannot be used.
 
+\begin{figure}[h]
+\caption{Validation MSE of RF on increasing T}
+\centering
+\includegraphics[width=0.85\textwidth]{Fig5}
+\end{figure}
 
-\item The IEEE has recommendations for generating PDF files whose fonts are also
-  acceptable for NeurIPS. Please see
-  \url{http://www.emfield.org/icuwb2010/downloads/IEEE-PDF-SpecV32.pdf}
+The data does confirm that the error does decrease with an increase in T. Long computational times prevented us from running validation sets on random forests larger than 70, however, the decrease in the MSE does seem to stochastically slow in the range of 60 to 70 trees, which resulted in a decision to use T = 65.
 
+The resulting training and test error of the random forest displayed the generalization power of Random forests very well. The test error of the random forest was significantly lower than that of the singular regression tree. However, it is worth noting that the training error did significantly increase compared to the singular decision tree.
 
-\item \verb+xfig+ "patterned" shapes are implemented with bitmap fonts.  Use
-  "solid" shapes instead.
+\begin{table}[ht]
+  \caption{Random Forest Results}
+  \label{sample-table}
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    Model     & RMSE \\
+    \midrule
+    Training RMSE       & 62.79       \\
+    Test RMSE           & 64.24      \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
+A histogram of the percent difference once again shows that the majority of the predictions were only about 10 percent off their true value, however, the distribution of the percent error is more distributed than the resulting distribution of the singular decision tree.
 
-\item The \verb+\bbold+ package almost always uses bitmap fonts.  You should use
-  the equivalent AMS Fonts:
-\begin{verbatim}
-   \usepackage{amsfonts}
-\end{verbatim}
-followed by, e.g., \verb+\mathbb{R}+, \verb+\mathbb{N}+, or \verb+\mathbb{C}+
-for $\mathbb{R}$, $\mathbb{N}$ or $\mathbb{C}$.  You can also use the following
-workaround for reals, natural and complex:
-\begin{verbatim}
-   \newcommand{\RR}{I\!\!R} %real numbers
-   \newcommand{\Nat}{I\!\!N} %natural numbers
-   \newcommand{\CC}{I\!\!\!\!C} %complex numbers
-\end{verbatim}
-Note that \verb+amsfonts+ is automatically loaded by the \verb+amssymb+ package.
-
-
-\end{itemize}
-
-
-If your file contains type 3 fonts or non embedded TrueType fonts, we will ask
-you to fix it.
-
-
-\subsection{Margins in \LaTeX{}}
-
-
-Most of the margin problems come from figures positioned by hand using
-\verb+\special+ or other commands. We suggest using the command
-\verb+\includegraphics+ from the \verb+graphicx+ package. Always specify the
-figure width as a multiple of the line width as in the example below:
-\begin{verbatim}
-   \usepackage[pdftex]{graphicx} ...
-   \includegraphics[width=0.8\linewidth]{myfile.pdf}
-\end{verbatim}
-See Section 4.4 in the graphics bundle documentation
-(\url{http://mirrors.ctan.org/macros/latex/required/graphics/grfguide.pdf})
-
-
-A number of width problems arise when \LaTeX{} cannot properly hyphenate a
-line. Please give LaTeX hyphenation hints using the \verb+\-+ command when
-necessary.
-
-
-\begin{ack}
-Use unnumbered first level headings for the acknowledgments. All acknowledgments
-go at the end of the paper before the list of references. Moreover, you are required to declare
-funding (financial activities supporting the submitted work) and competing interests (related financial activities outside the submitted work).
-More information about this disclosure can be found at: \url{https://neurips.cc/Conferences/2022/PaperInformation/FundingDisclosure}.
-
-
-Do {\bf not} include this section in the anonymized submission, only in the final paper. You can use the \texttt{ack} environment provided in the style file to autmoatically hide this section in the anonymized submission.
-\end{ack}
-
-
-\section*{References}
-
-
-References follow the acknowledgments. Use unnumbered first-level heading for
-the references. Any choice of citation style is acceptable as long as you are
-consistent. It is permissible to reduce the font size to \verb+small+ (9 point)
-when listing the references.
-Note that the Reference section does not count towards the page limit.
-\medskip
+\begin{figure}[h]
+\caption{Histogram of \% Difference (Random Forest)}
+\centering
+\includegraphics[width=0.7\textwidth]{Fig6}
+\end{figure}
 
 
-{
-\small
+\section{Conclusion}
 
+In this report, we presented an approach to using decision tree based models to predict airline ticket prices. Our project successfully demonstrated the potential of using a random forest algorithm for predicting future flight prices with a reasonable degree of accuracy. Our model achieved an RMSE of 62.7876 on the training set and 64.2394 on the test set, outperforming a single decision tree model, which exhibited over-fitting. This result validates the effectiveness of ensemble methods like random forests in mitigating over-fitting and improving generalization.
 
-[1] Alexander, J.A.\ \& Mozer, M.C.\ (1995) Template-based algorithms for
-connectionist rule extraction. In G.\ Tesauro, D.S.\ Touretzky and T.K.\ Leen
-(eds.), {\it Advances in Neural Information Processing Systems 7},
-pp.\ 609--616. Cambridge, MA: MIT Press.
+Another key factor we were exploring was the ability of random forests to generalize well to machine learning problems without a large amount of training data. Although our dataset consisted of about three hundred thousand data points, through repeated trials we realized we only needed ten thousand data points in our training set to optimize our test error. The test error of the singular decision tree was found to be higher than that of the random forest, while the training error of the same singular tree was reportedly lower than that of the random forest. This is an indication of over-fitting on the part of the singular decision tree. Utilizing the random forest decreased the variance of the model but increased the bias.
 
+\subsection{Future Exploration}
 
-[2] Bower, J.M.\ \& Beeman, D.\ (1995) {\it The Book of GENESIS: Exploring
-  Realistic Neural Models with the GEneral NEural SImulation System.}  New York:
-TELOS/Springer--Verlag.
+Although our solution of using random forests worked well, there are numerous other ensemble methods we considered. Some of these including but not limited to:
 
+\subsubsection{Gradient Boosting}
 
-[3] Hasselmo, M.E., Schnell, E.\ \& Barkai, E.\ (1995) Dynamics of learning and
-recall at excitatory recurrent synapses and cholinergic modulation in rat
-hippocampal region CA3. {\it Journal of Neuroscience} {\bf 15}(7):5249-5262.
-}
+Even though the test error we reported was generally good, other ensemble methods may provide better results. One ensemble method that we might have implemented is Gradient Boosting, which is often used with regression trees. Furthermore, the use of multi-layered gradient boosting trees, proposed by Ji Feng, Yang Yu and Zhi-Hua Zhou, mimic the key feature of deep neural networks: multi-layered distributed representation \cite{Feng}. Such a method might be able to better distinguish patterns in the data over time, leading to more accurate results.
+
+\subsubsection{Probabilistic Regression Trees}
+
+A limitation of traditional regression trees is their inability to perfectly fit smooth continuous data. Sami Alkhoury et al. propose probabilistic regression trees to address the issue by introducing a probabilistic framework to tree-based models, potentially leading to improved predictions \cite{Alkhoury}. Applying this method to our project could further reduce the RMSE of the predictions and provide more accurate predictions for future flight prices. Additionally, this approach offers better interpretability by providing probabilistic estimates for each prediction, which could be valuable for decision-makers in the airline industry. Future work could explore the use of probabilistic regression trees in conjunction with other advanced machine-learning techniques to further enhance our flight price prediction model.
+
+\subsection{Applications}
+
+The accurate prediction of future flight prices has numerous practical applications and uses in the airline industry and for consumers alike. For airlines, understanding the factors affecting flight prices and anticipating price fluctuations can inform dynamic pricing strategies, helping companies optimize revenue management. With better predictions, airlines can make data-driven decisions on seat pricing, adjusting prices in response to demand, seasonality, or other market factors.
+
+For travelers, a flight price prediction model can be a valuable tool in planning trips and budgeting for expenses. By providing insights into when flight prices are likely to rise or fall, the model can help consumers make informed decisions about when to book their flights, potentially leading to cost savings. Furthermore, travel agencies and online travel platforms can utilize the model to offer personalized flight recommendations, catering to individual preferences and budgets. Integrating the model into their services could provide a competitive advantage and enhance the user experience by helping customers find the best deals on flights.
+
+In summary, an accurate flight price prediction model has wide-ranging applications across the airline industry and for consumers. From optimizing revenue management for airlines to aiding travelers in finding the best deals, the potential uses of such a model are vast and can contribute to more efficient and cost-effective travel experiences for all parties involved.
+
+\subsection{Acknowledgments}
+
+Special thanks to Professor Orabona for an informative and eye-opening semester.
+
+\pagebreak
+
+\bibliographystyle{plain}
+\bibliography{citations/Maksym,citations/Luo,citations/Feng,citations/Kleinber,citations/Breiman,citations/kaggle,citations/Alkhoury}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Checklist}
-
-
-%%% BEGIN INSTRUCTIONS %%%
-The checklist follows the references.  Please
-read the checklist guidelines carefully for information on how to answer these
-questions.  For each question, change the default \answerTODO{} to \answerYes{},
-\answerNo{}, or \answerNA{}.  You are strongly encouraged to include a {\bf
-justification to your answer}, either by referencing the appropriate section of
-your paper or providing a brief inline description.  For example:
-\begin{itemize}
-  \item Did you include the license to the code and datasets? \answerYes{See Section~\ref{gen_inst}.}
-  \item Did you include the license to the code and datasets? \answerNo{The code and the data are proprietary.}
-  \item Did you include the license to the code and datasets? \answerNA{}
-\end{itemize}
-Please do not modify the questions and only use the provided macros for your
-answers.  Note that the Checklist section does not count towards the page
-limit.  In your paper, please delete this instructions block and only keep the
-Checklist section heading above along with the questions/answers below.
-%%% END INSTRUCTIONS %%%
-
-
-\begin{enumerate}
-
-
-\item For all authors...
-\begin{enumerate}
-  \item Do the main claims made in the abstract and introduction accurately reflect the paper's contributions and scope?
-    \answerTODO{}
-  \item Did you describe the limitations of your work?
-    \answerTODO{}
-  \item Did you discuss any potential negative societal impacts of your work?
-    \answerTODO{}
-  \item Have you read the ethics review guidelines and ensured that your paper conforms to them?
-    \answerTODO{}
-\end{enumerate}
-
-
-\item If you are including theoretical results...
-\begin{enumerate}
-  \item Did you state the full set of assumptions of all theoretical results?
-    \answerTODO{}
-        \item Did you include complete proofs of all theoretical results?
-    \answerTODO{}
-\end{enumerate}
-
-
-\item If you ran experiments...
-\begin{enumerate}
-  \item Did you include the code, data, and instructions needed to reproduce the main experimental results (either in the supplemental material or as a URL)?
-    \answerTODO{}
-  \item Did you specify all the training details (e.g., data splits, hyperparameters, how they were chosen)?
-    \answerTODO{}
-        \item Did you report error bars (e.g., with respect to the random seed after running experiments multiple times)?
-    \answerTODO{}
-        \item Did you include the total amount of compute and the type of resources used (e.g., type of GPUs, internal cluster, or cloud provider)?
-    \answerTODO{}
-\end{enumerate}
-
-
-\item If you are using existing assets (e.g., code, data, models) or curating/releasing new assets...
-\begin{enumerate}
-  \item If your work uses existing assets, did you cite the creators?
-    \answerTODO{}
-  \item Did you mention the license of the assets?
-    \answerTODO{}
-  \item Did you include any new assets either in the supplemental material or as a URL?
-    \answerTODO{}
-  \item Did you discuss whether and how consent was obtained from people whose data you're using/curating?
-    \answerTODO{}
-  \item Did you discuss whether the data you are using/curating contains personally identifiable information or offensive content?
-    \answerTODO{}
-\end{enumerate}
-
-
-\item If you used crowdsourcing or conducted research with human subjects...
-\begin{enumerate}
-  \item Did you include the full text of instructions given to participants and screenshots, if applicable?
-    \answerTODO{}
-  \item Did you describe any potential participant risks, with links to Institutional Review Board (IRB) approvals, if applicable?
-    \answerTODO{}
-  \item Did you include the estimated hourly wage paid to participants and the total amount spent on participant compensation?
-    \answerTODO{}
-\end{enumerate}
-
-
-\end{enumerate}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\appendix
-
-
-\section{Appendix}
-
-
-Optionally include extra information (complete proofs, additional experiments and plots) in the appendix.
-This section will often be part of the supplemental material.
 
 
 \end{document}
